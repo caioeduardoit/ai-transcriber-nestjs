@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { createReadStream, writeFileSync, unlinkSync } from 'fs';
+import { createReadStream, createWriteStream, unlinkSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import OpenAI from 'openai';
@@ -24,12 +24,21 @@ export class OpenaiService {
         // Gera um caminho temporário
         const tempFilePath = join(tmpdir(), `${randomUUID()}-${originalFileName}`);
 
-        // Escreve o buffer em disco
-        writeFileSync(tempFilePath, fileBuffer);
+        // Escreve o conteúdo do arquivo no caminho temporário
+        await new Promise<void>((resolve, reject) => {
+            const writeStream = createWriteStream(tempFilePath);
+            writeStream.write(fileBuffer);
+            writeStream.end();
+
+            writeStream.on('finish', resolve);
+            writeStream.on('error', reject);
+        });
 
         try {
+            const fileBlob = new Blob([fileBuffer]);
+
             const transcription = await this.openai.audio.transcriptions.create({
-                file: createReadStream(tempFilePath), // ✅ compatível com a tipagem exigida
+                file: createReadStream(tempFilePath),
                 model: model || 'whisper-1',
                 prompt: additionalInfo || '',
                 language: 'pt',

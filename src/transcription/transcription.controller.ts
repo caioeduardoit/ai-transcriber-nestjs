@@ -10,9 +10,12 @@ export class TranscriptionController {
     @Post('upload')
     @UseInterceptors(FileInterceptor('file'))
     async handleUpload(@UploadedFile() file: Express.Multer.File, @Body() body: TranscribeAudioDto) {
-
         if (!file) {
             throw new BadRequestException('Nenhum arquivo enviado.');
+        }
+
+        if (!body.provider) {
+            throw new BadRequestException('O campo "provider" é obrigatório.');
         }
 
         return this.transcriptionService.transcribe(

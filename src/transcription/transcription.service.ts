@@ -15,11 +15,13 @@ export class TranscriptionService {
             throw new Error('Arquivo inválido ou ausente.');
         }
 
+        const fileBuffer = file.buffer;
+
         switch (provider.toLowerCase()) {
             case 'openai':
                 const transcription = await this.openaiService.transcribe(
                     model,
-                    file.buffer,
+                    fileBuffer,
                     file.originalname,
                     additionalInfo
                 );
