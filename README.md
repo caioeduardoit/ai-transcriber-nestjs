@@ -32,7 +32,7 @@ Fornecer uma solução flexível e escalável para transcrição de áudios util
 ├── .gitignore                 # Arquivos a serem ignorados pelo git
 ├── Dockerfile                 # Configuração para containerização (opcional)
 ├── package.json               # Dependências do projeto
-└── README.md                  # Documentação do projeto
+└── README.md                  # Documentação do projeto```
 
 ### 🚀 **Como Rodar o Projeto**
 
@@ -50,19 +50,19 @@ Fornecer uma solução flexível e escalável para transcrição de áudios util
 
    ```bash
    git clone https://github.com/caioeduardoit/ai-transcriber-nestjs.git
-   cd ai-transcriber-nestjs
+   cd ai-transcriber-nestjs```
 
 2. **Instale as dependências**:
   ```bash
-  npm install
+  npm install```
 
 3. **Configure a variável de ambiente `OPENAI_API_KEY` com sua chave da OpenAI. Crie um arquivo `.env` na raiz do projeto:
   ```env
-  OPENAI_API_KEY=your-api-key-here
+  OPENAI_API_KEY=your-api-key-here```
 
 4. **Inicie a aplicação**:
   ```bash
-  npm run start
+  npm run start```
 
 
 #### 2. **Instalação com Docker (recomendado)**
@@ -76,15 +76,15 @@ Fornecer uma solução flexível e escalável para transcrição de áudios util
 1. **Clone o repositório**:
    ```bash
    git clone https://github.com/caioeduardoit/ai-transcriber-nestjs.git
-   cd ai-transcriber-nestjs
+   cd ai-transcriber-nestjs```
 
 2. **Crie a imagem Docker**:
   ```bash
-  docker build -t ai-transcriber-nestjs
+  docker build -t ai-transcriber-nestjs```
 
 3. **Inicie o container**:
   ```bash
-  docker run -p 3000:3000 --env OPENAI_API_KEY=your-api-key-here ai-transcriber-nestjs
+  docker run -p 3000:3000 --env OPENAI_API_KEY=your-api-key-here ai-transcriber-nestjs```
 
 A aplicação estará disponível em `http://localhost:3000`.
 
@@ -118,7 +118,7 @@ Você pode configurar outras variáveis de ambiente ou opções adicionais no ar
 
 ```env
 # Chave da API do OpenAI
-OPENAI_API_KEY=your-openai-api-key
+OPENAI_API_KEY=your-openai-api-key```
 
 # Porta que o servidor irá rodar
 PORT=3000
@@ -135,7 +135,7 @@ Testes automatizados serão implementados em breve utilizando o framework **Jest
 Você pode executar os testes com o comando:
 
 ```bash
-npm run test
+npm run test```
 
 
 ### 📢 **Contribuições**
