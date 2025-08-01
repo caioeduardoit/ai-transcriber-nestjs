@@ -172,7 +172,6 @@ Fique à vontade para abrir **issues** caso encontre algum bug ou tenha sugestõ
 
 Se quiser trocar uma ideia, falar sobre o projeto ou só dar um alô, é só me chamar:
 
-- **Email:** seuemail@exemplo.com  
 - **LinkedIn:** [https://www.linkedin.com/in/caio-eduardo-cardoso-340250121](https://www.linkedin.com/in/caio-eduardo-cardoso-340250121)  
 - **GitHub:** [github.com/caioeduardoit](https://github.com/caioeduardoit)  
 
