@@ -165,3 +165,17 @@ Estou sempre aberto a melhorias e sugestões, então se você tiver alguma ideia
 ---
 
 Fique à vontade para abrir **issues** caso encontre algum bug ou tenha sugestões para novas funcionalidades.
+
+---
+
+## 📬 Contato
+
+Se quiser trocar uma ideia, falar sobre o projeto ou só dar um alô, é só me chamar:
+
+- **Email:** seuemail@exemplo.com  
+- **LinkedIn:** [https://www.linkedin.com/in/caio-eduardo-cardoso-340250121](https://www.linkedin.com/in/caio-eduardo-cardoso-340250121)  
+- **GitHub:** [github.com/caioeduardoit](https://github.com/caioeduardoit)  
+
+Fique à vontade para abrir issues, mandar sugestões ou me chamar nas redes!
+
+
