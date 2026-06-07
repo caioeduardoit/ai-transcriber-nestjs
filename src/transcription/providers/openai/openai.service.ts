@@ -18,11 +18,12 @@ export class OpenaiService {
   ): Promise<string> {
     const file = await toFile(fileBuffer, originalFileName);
 
+    const resolvedLanguage = language || 'pt';
     const transcription = await this.openai.audio.transcriptions.create({
       file,
       model,
       prompt: additionalInfo || '',
-      language: language || 'pt',
+      ...(resolvedLanguage !== 'auto' ? { language: resolvedLanguage } : {}),
     });
 
     return transcription.text;

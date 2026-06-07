@@ -69,6 +69,14 @@ describe('OpenaiService', () => {
     );
   });
 
+  it('omite o campo language quando "auto" é passado, permitindo detecção automática', async () => {
+    await service.transcribe('whisper-1', Buffer.from('audio'), 'audio.mp3', '', 'auto');
+
+    expect(mockCreate).toHaveBeenCalledWith(
+      expect.not.objectContaining({ language: expect.anything() }),
+    );
+  });
+
   it('retorna o texto da transcrição', async () => {
     mockCreate.mockResolvedValue({ text: 'texto esperado' });
 

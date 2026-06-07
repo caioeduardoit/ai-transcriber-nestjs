@@ -20,11 +20,15 @@ import {
     },
     {
       provide: GROQ_CLIENT,
-      useFactory: () =>
-        new OpenAI({
-          apiKey: process.env.GROQ_API_KEY ?? 'not-configured',
+      useFactory: () => {
+        if (!process.env.GROQ_API_KEY) {
+          throw new Error('GROQ_API_KEY não configurada. Defina a variável de ambiente antes de iniciar.');
+        }
+        return new OpenAI({
+          apiKey: process.env.GROQ_API_KEY,
           baseURL: 'https://api.groq.com/openai/v1',
-        }),
+        });
+      },
     },
     {
       provide: GROQ_SERVICE,
