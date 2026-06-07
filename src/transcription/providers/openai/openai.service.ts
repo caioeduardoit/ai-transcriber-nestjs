@@ -2,6 +2,8 @@ import { Injectable, Inject } from '@nestjs/common';
 import OpenAI, { toFile } from 'openai';
 
 export const OPENAI_CLIENT = Symbol('OPENAI_CLIENT');
+export const GROQ_CLIENT = Symbol('GROQ_CLIENT');
+export const GROQ_SERVICE = Symbol('GROQ_SERVICE');
 
 @Injectable()
 export class OpenaiService {
