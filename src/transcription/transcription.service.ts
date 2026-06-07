@@ -8,12 +8,32 @@ export interface TranscriptionResult {
   transcription: string;
 }
 
+type ProviderKey = 'openai' | 'groq';
+
+interface ProviderConfig {
+  service: () => OpenaiService;
+  defaultModel: string;
+}
+
 @Injectable()
 export class TranscriptionService {
+  private readonly providerConfig: Record<ProviderKey, ProviderConfig>;
+
   constructor(
     private readonly openaiService: OpenaiService,
     @Inject(GROQ_SERVICE) private readonly groqService: OpenaiService,
-  ) {}
+  ) {
+    this.providerConfig = {
+      openai: {
+        service: () => this.openaiService,
+        defaultModel: 'gpt-4o-transcribe',
+      },
+      groq: {
+        service: () => this.groqService,
+        defaultModel: 'whisper-large-v3',
+      },
+    };
+  }
 
   async transcribe(
     provider: string,
@@ -26,49 +46,32 @@ export class TranscriptionService {
       throw new Error('Arquivo inválido ou ausente.');
     }
 
-    const fileBuffer = file.buffer;
+    const key = provider.toLowerCase() as ProviderKey;
+    const config = this.providerConfig[key];
 
-    switch (provider.toLowerCase()) {
-      case 'openai': {
-        const resolvedModel = model || 'gpt-4o-transcribe';
-        const resolvedInfo = additionalInfo ?? '';
-        const resolvedLanguage = language ?? '';
-        const transcription = await this.openaiService.transcribe(
-          resolvedModel,
-          fileBuffer,
-          file.originalname,
-          resolvedInfo,
-          resolvedLanguage,
-        );
-        return {
-          provider: 'openai',
-          model: resolvedModel,
-          additionalInfo: additionalInfo || 'No additional info provided',
-          transcription,
-        };
-      }
-
-      case 'groq': {
-        const resolvedModel = model || 'whisper-large-v3';
-        const resolvedInfo = additionalInfo ?? '';
-        const resolvedLanguage = language ?? '';
-        const transcription = await this.groqService.transcribe(
-          resolvedModel,
-          fileBuffer,
-          file.originalname,
-          resolvedInfo,
-          resolvedLanguage,
-        );
-        return {
-          provider: 'groq',
-          model: resolvedModel,
-          additionalInfo: additionalInfo || 'No additional info provided',
-          transcription,
-        };
-      }
-
-      default:
-        throw new Error(`Provider ${provider} not supported.`);
+    if (!config) {
+      throw new Error(`Provider ${provider} not supported.`);
     }
+
+    const resolvedModel = model || config.defaultModel;
+    const resolvedInfo = additionalInfo ?? '';
+    const resolvedLanguage = language ?? '';
+
+    const transcription = await config
+      .service()
+      .transcribe(
+        resolvedModel,
+        file.buffer,
+        file.originalname,
+        resolvedInfo,
+        resolvedLanguage,
+      );
+
+    return {
+      provider: key,
+      model: resolvedModel,
+      additionalInfo: resolvedInfo || 'No additional info provided',
+      transcription,
+    };
   }
 }

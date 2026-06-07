@@ -97,7 +97,13 @@ describe('TranscriptionService', () => {
   it('delega para groqService quando provider é groq', async () => {
     groqService.transcribe.mockResolvedValue('texto groq');
 
-    await service.transcribe('groq', 'whisper-large-v3', mockFile(), 'info', 'pt');
+    await service.transcribe(
+      'groq',
+      'whisper-large-v3',
+      mockFile(),
+      'info',
+      'pt',
+    );
 
     expect(groqService.transcribe).toHaveBeenCalledWith(
       'whisper-large-v3',

@@ -14,4 +14,4 @@ import { TranscriptionModule } from './transcription/transcription.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
