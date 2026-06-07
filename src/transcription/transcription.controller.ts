@@ -33,9 +33,9 @@ export class TranscriptionController {
 
     return this.transcriptionService.transcribe(
       body.provider,
-      body.model || 'whisper-1',
+      body.model ?? '',
       file,
-      body.additionalInfo || '',
+      body.additionalInfo ?? '',
       body.language,
     );
   }

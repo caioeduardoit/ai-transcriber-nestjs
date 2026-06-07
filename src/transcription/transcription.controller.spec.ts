@@ -72,7 +72,7 @@ describe('TranscriptionController', () => {
     );
   });
 
-  it('usa whisper-1 como model padrão quando não informado', async () => {
+  it('passa model vazio para o service quando model não é informado', async () => {
     transcriptionService.transcribe.mockResolvedValue(mockResult);
     const body: TranscribeAudioDto = { provider: 'openai' };
     const file = mockFile();
@@ -81,7 +81,7 @@ describe('TranscriptionController', () => {
 
     expect(transcriptionService.transcribe).toHaveBeenCalledWith(
       'openai',
-      'whisper-1',
+      '',
       file,
       '',
       undefined,
