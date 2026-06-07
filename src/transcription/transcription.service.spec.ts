@@ -27,7 +27,7 @@ describe('TranscriptionService', () => {
 
     service = module.get<TranscriptionService>(TranscriptionService);
     openaiService = module.get(OpenaiService);
-    groqService = module.get<OpenaiService>(GROQ_SERVICE);
+    groqService = module.get(GROQ_SERVICE);
   });
 
   it('lança erro quando o arquivo não tem buffer', async () => {
